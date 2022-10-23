@@ -3,18 +3,34 @@
 pragma solidity ^0.7.6;
 
 contract testContract {
+    
+   
+  //  struct Transferout{
+   // . . . 
+//}
 
-    uint256 value;
+    address initiator;
+    uint256 public finishtime;
+    uint256 public GoalAmt;
+    uint public mindonation;
+    
+    mapping(address => uint256) public AddresstoDonatedamt;
+    address[] public donors;
 
-    constructor (uint256 _p) {
-        value = _p;
+    constructor CreateProject(uint256 days, uint256 goal) public {
+        initiator = msg.sender;
+        finishtime = now + days;
+        GoalAmt = goal;
     }
 
-    function setP(uint256 _n) payable public {
-        value = _n;
+    function donate() public payable {
+        require(now < finishtime)
+        require(msg.value > mindonation);
+        AddresstoDonatedamt[msg.sender] += msg.value;
+        donors.push(msg.sender);
     }
 
-    function setNP(uint256 _n) public {
+    function TransferOut(uint256 _n) public {
         value = _n;
     }
 
