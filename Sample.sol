@@ -4,18 +4,24 @@ pragma solidity ^0.7.6;
 
 contract testContract {
     
-   
-  //  struct Transferout{
-   // . . . 
-//}
-
+    //basic struct for project info
+    struct Project{
+        string projectID;
+        string description;
+        uint CurrentAmt;
+    }
+        
+    //variables for other functions
     address initiator;
     uint256 public finishtime;
     uint256 public GoalAmt;
     uint public mindonation;
     
+    
     mapping(address => uint256) public AddresstoDonatedamt;
     address[] public donors;
+    
+    mapping (uint => Project) public Projects;
 
     constructor CreateProject(uint256 days, uint256 goal) public {
         initiator = msg.sender;
@@ -27,7 +33,7 @@ contract testContract {
         require(now < finishtime)
         require(msg.value > mindonation);
         AddresstoDonatedamt[msg.sender] += msg.value;
-        donors.push(msg.sender);
+        donors.push(msg.sender);    
     }
 
     function TransferOut(uint256 _n) public {
