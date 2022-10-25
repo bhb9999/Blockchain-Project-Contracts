@@ -6,9 +6,8 @@ contract testContract {
     
     //basic struct for project info
     struct Project{
-        string projectID;
+        string ID;
         string description;
-        uint CurrentAmt;
     }
         
     //variables for other functions
@@ -22,8 +21,14 @@ contract testContract {
     address[] public donors;
     
     mapping (uint => Project) public Projects;
+    uint[] public Projectlist;
+    
+    constructor Initialise() public {
+        Project.ID = "ID1"
+        Project.description = "ID1 crowdfunding description"
+ 
 
-    constructor CreateProject(uint256 days, uint256 goal) public {
+    function CreateProject(uint256 days, uint256 goal) public {
         initiator = msg.sender;
         finishtime = now + days;
         GoalAmt = goal;
